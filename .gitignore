@@ -1,0 +1,27 @@
+# Local data pack: never commit the database or product images
+data/
+*.db
+*.zip
+
+# Secrets: keep real keys out of git (the example file is fine)
+.env
+.env.*
+!.env.example
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# Node / Vite
+node_modules/
+dist/
+*.tsbuildinfo
+
+# Editors, OS, logs
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.log

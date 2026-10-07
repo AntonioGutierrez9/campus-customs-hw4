@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Campus Customs: App Check</title>
+    <style>
+      :root {
+        --navy: #00356b;
+        --navy-deep: #0b1d3a;
+        --cream: #fbf8f2;
+        --cream-deep: #f3ece0;
+        --sand: #e4d9c6;
+        --brass: #a07e4c;
+        --ink: #18202e;
+        --muted: #646b78;
+        --pass: #1f7a4d;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        background: var(--cream);
+        color: var(--ink);
+        font: 16px/1.6 "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+      }
+      header {
+        background: var(--navy-deep);
+        color: #f3ece0;
+        padding: 2.75rem 1.5rem 2.25rem;
+      }
+      .wrap { width: min(1100px, 100%); margin: 0 auto; }
+      .kicker {
+        margin: 0 0 0.4rem;
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: #e8d6b4;
+      }
+      h1, h2 { font-family: "Cormorant Garamond", Garamond, Georgia, serif; font-weight: 600; line-height: 1.1; }
+      h1 { margin: 0 0 0.6rem; font-size: 2.8rem; }
+      header p { margin: 0; max-width: 46rem; color: rgba(243, 236, 224, 0.85); }
+      .summary { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.4rem; }
+      .summary a {
+        display: inline-flex; align-items: center; gap: 0.45rem;
+        padding: 0.4rem 0.9rem; border-radius: 999px;
+        background: rgba(243, 236, 224, 0.12); color: #f3ece0;
+        font-size: 0.88rem; text-decoration: none;
+      }
+      .summary a:hover { background: rgba(243, 236, 224, 0.22); }
+      main { padding: 2.5rem 1.5rem 3rem; }
+      section {
+        margin-bottom: 2.5rem;
+        padding: 1.75rem;
+        border: 1px solid var(--sand);
+        border-radius: 20px;
+        background: #fff;
+      }
+      .check-head { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+      h2 { margin: 0 0 0.75rem; font-size: 2rem; color: var(--navy); }
+      h2 span { color: var(--brass); }
+      .badge {
+        padding: 0.25rem 0.75rem; border-radius: 999px;
+        background: #e3f3ea; color: var(--pass);
+        font-size: 0.8rem; font-weight: 700; letter-spacing: 0.04em;
+      }
+      figure { margin: 0; }
+      img {
+        display: block; width: 100%; height: auto;
+        border: 1px solid var(--sand); border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(11, 29, 58, 0.08);
+      }
+      figcaption { margin-top: 0.9rem; font-size: 1rem; }
+      .details { margin-top: 1rem; font-size: 0.92rem; color: var(--muted); }
+      .details strong { color: var(--ink); }
+      table { border-collapse: collapse; margin-top: 0.6rem; font-size: 0.9rem; }
+      th, td { padding: 0.35rem 0.8rem; border: 1px solid var(--sand); text-align: center; }
+      th { background: var(--cream-deep); color: var(--navy); }
+      td.ok { color: var(--pass); font-weight: 700; }
+      code { background: var(--cream-deep); padding: 0.1rem 0.35rem; border-radius: 5px; font-size: 0.86em; }
+      header code { background: rgba(243, 236, 224, 0.16); color: #fff; }
+      footer { padding: 0 1.5rem 2.5rem; font-size: 0.85rem; color: var(--muted); }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="wrap">
+        <p class="kicker">Homework 4 · Problem 11</p>
+        <h1>Campus Customs: App Check</h1>
+        <p>
+          Three checks run on the live site (React frontend at <code>localhost:5174</code>, FastAPI backend at
+          <code>localhost:8000</code>, PydanticAI agent using <code>gpt-5.6-luna</code>). Every screenshot is from the
+          running app, and every number was compared with <code>data/campus_customs.db</code>.
+        </p>
+        <div class="summary">
+          <a href="#inventory">✓ 1. Inventory / price</a>
+          <a href="#cards">✓ 2. Dynamic product cards</a>
+          <a href="#favorites">✓ 3. Favorites (Problem 9)</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="wrap">
+      <section id="inventory">
+        <div class="check-head">
+          <h2><span>1.</span> Inventory / Price Check</h2>
+          <span class="badge">PASS · matches database</span>
+        </div>
+        <figure>
+          <img src="app_check_images/inventory.png" alt="Chatbot answering the price and stock of the Pierson College Crewneck" />
+          <figcaption>
+            I asked the chatbot <em>"How much is the Pierson College Crewneck, and how many do you have in stock in each
+            size?"</em> It answered $58.00 with the stock for every size, including that L and XL are out of stock, and
+            all of it matches <code>campus_customs.db</code> exactly.
+          </figcaption>
+        </figure>
+        <div class="details">
+          <strong>Database check</strong> (<code>catalogue</code> price + <code>inventory</code> rows for
+          <code>pierson-college-crewneck</code>):
+          <table>
+            <tr><th></th><th>Price</th><th>XS</th><th>S</th><th>M</th><th>L</th><th>XL</th><th>XXL</th></tr>
+            <tr><th>Chatbot said</th><td>$58.00</td><td>12</td><td>2</td><td>8</td><td>0 (out)</td><td>0 (out)</td><td>2</td></tr>
+            <tr><th>Database</th><td>$58.00</td><td>12</td><td>2</td><td>8</td><td>0</td><td>0</td><td>2</td></tr>
+            <tr><th>Match</th><td class="ok">✓</td><td class="ok">✓</td><td class="ok">✓</td><td class="ok">✓</td><td class="ok">✓</td><td class="ok">✓</td><td class="ok">✓</td></tr>
+          </table>
+        </div>
+      </section>
+
+      <section id="cards">
+        <div class="check-head">
+          <h2><span>2.</span> Dynamic Product Cards</h2>
+          <span class="badge">PASS · 27 of 27 cards match</span>
+        </div>
+        <figure>
+          <img src="app_check_images/dynamic_cards.png" alt="Chatbot reply to 'What hoodies do you have?' with hoodie product cards on the page" />
+          <figcaption>
+            After I asked <em>"What hoodies do you have?"</em>, the chatbot replied in the chat and the page updated by
+            itself (no refresh) to show the matching hoodies as real product cards under a "From your shopping
+            assistant" banner. The cards come from the structured API response, not from the reply text.
+          </figcaption>
+        </figure>
+        <div class="details">
+          <strong>Checks:</strong> the API returned <strong>27</strong> product cards, and the database has
+          <strong>27</strong> hoodies. Every card's name, price, and image matched its <code>catalogue</code> row (0
+          mismatches). Clicking the first card, <em>Basic Hoodie Big Yale</em>, opened the normal product page
+          <code>/products/basic-hoodie-big-yale</code> with the same product.
+        </div>
+      </section>
+
+      <section id="favorites">
+        <div class="check-head">
+          <h2><span>3.</span> Favorites (Problem 9 usability feature)</h2>
+          <span class="badge">PASS · saved in database</span>
+        </div>
+        <figure>
+          <img src="app_check_images/favorites.png" alt="Favorites page for logged-in user Jordan showing 5 favorited products" />
+          <figcaption>
+            Logged in as Jordan, I clicked the heart on the <em>Yale Mom Hoodie</em> and the <em>Boola Boola T
+            Shirt</em> on the Products page. The Favorites page then showed them together with Jordan's 3 earlier
+            favorites (5 total, matching the badge in the navigation), because logged-in favorites are saved to the
+            account.
+          </figcaption>
+        </figure>
+        <div class="details">
+          <strong>Database check:</strong> the <code>favorites</code> table for Jordan (user 4) holds the same 5 products
+          in the same order: Boola Boola T Shirt, Yale Mom Hoodie, Basic Hoodie Big Yale, Pierson College Crewneck,
+          Trumbull 1 4 Zip.
+        </div>
+      </section>
+    </main>
+
+    <footer class="wrap">
+      Screenshots were taken with a real browser (Chrome, 1440px wide) driving the running site: typing into the chat
+      widget, clicking the hearts, and following the links like a shopper would.
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,8 @@
+# Python dependencies for the FastAPI backend (tested with Python 3.14)
+fastapi>=0.142
+uvicorn[standard]>=0.54
+pydantic-ai-slim[openai]>=2.54,<3   # the shopping agent (PydanticAI + OpenAI-compatible client for Portkey)
+python-dotenv>=1.2                  # reads .env
+itsdangerous>=2.2                   # signed login session cookies
+email-validator>=2.3                # email checks on Create Account
+pillow>=12.3                        # cleans product photo backgrounds
